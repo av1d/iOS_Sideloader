@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Installed Apps</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .app-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .app-name {
+            font-family: monospace;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+    <h2>Manage Installed Apps</h2>
+    <div class="alert alert-info">
+        <strong>Connected to:</strong> {{ settings['REMOTE_IP'] }}<br>
+        <strong>Note:</strong> This only shows actual installed app bundles.<br>
+        <strong>Tip:</strong> Only delete apps you're absolutely sure about. This will run uicache to refresh icons.
+    </div>
+    {% if apps %}
+        <h4>Installed Apps ({{ apps|length }})</h4>
+        <div class="alert alert-warning">
+            <strong>Warning:</strong> Be careful when deleting apps. This will permanently remove the app and run uicache to refresh SpringBoard.
+        </div>
+        {% for app in apps %}
+        <div class="app-item">
+            <span class="app-name">{{ app.app_name }}</span>
+            <form method="post" action="/uninstall/{{ app.uuid }}" style="margin: 0;">
+                <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Permanently uninstall {{ app.app_name }}? This cannot be undone.');">
+                    Uninstall
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning">
+            No apps found or unable to connect to device.
+        </div>
+    {% endif %}
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">Back to Upload</a>
+        <a href="/manage" class="btn btn-primary">Refresh List</a>
+    </div>
+</body>
+</html>

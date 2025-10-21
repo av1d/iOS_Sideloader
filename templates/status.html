@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Status</title>
+    <meta http-equiv="refresh" content="2">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        #statusbox {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 1em;
+            border: 1px solid #dee2e6;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+    <h2>Status</h2>
+    <pre id="statusbox">{{ status|join('\n') }}</pre>
+    <a href="/" class="btn btn-secondary">Back</a>
+    <script>
+        window.onload = function() {
+            var elem = document.getElementById('statusbox');
+            elem.scrollTop = elem.scrollHeight;
+        };
+    </script>
+</body>
+</html>
