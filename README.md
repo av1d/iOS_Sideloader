@@ -18,6 +18,7 @@ Some paths and methods may need to be updated for other devices or iOS versions.
 
 - Python 3.x
 - A jailbroken iOS device with SSH access enabled
+- Install 'IPA Installer Console' on your device from Cydia (Cydia is installed during jailbreak)
 - Network connectivity between your computer and iOS device (same network or accessible IP)
 - SSH credentials for your iOS device (default: user=root, password=alpine)
 
@@ -127,6 +128,7 @@ The `/status` page displays real-time information about:
 You can modify settings either by:
 - Editing `settings.json` directly
 - Using the web interface form on the upload page
+- You can use appinstaller instead of IPA Installer, just change the command in app.py
 
 ### Security Considerations
 
