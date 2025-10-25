@@ -3,6 +3,16 @@
 <head>
     <title>SCP Uploader</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .ipa-row-even {
+            background-color: #d1ecf1;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .ipa-row-odd {
+            padding: 8px;
+        }
+    </style>
 </head>
 <body class="container mt-4">
     <h2>File Upload</h2>
@@ -27,9 +37,30 @@
             <label>Remote Path</label>
             <input name="REMOTE_PATH" value="{{ settings['REMOTE_PATH'] }}" class="form-control"/>
         </div>
+        <div class="mb-3">
+            <label>Local IPA Paths (comma-separated)</label>
+            <input name="LOCAL_IPA_PATHS" value="{{ settings.LOCAL_IPA_PATHS|join(', ') }}" class="form-control"/>
+        </div>
         <button type="submit" class="btn btn-primary">Upload</button>
         <a href="/" class="btn btn-secondary">Clear</a>
         <a href="/manage" class="btn btn-info">Manage Files</a>
     </form>
+
+    <hr class="my-4">
+
+    <h2>Send Local IPA Files</h2>
+    {% if local_ipas %}
+        {% for ipa in local_ipas %}
+        <form method="POST" action="/send_local" class="mb-2">
+            <input type="hidden" name="filepath" value="{{ ipa.full_path }}">
+            <div class="d-flex align-items-center {% if loop.index % 2 == 0 %}ipa-row-even{% else %}ipa-row-odd{% endif %}">
+                <span class="flex-grow-1">{{ ipa.filename }}</span>
+                <button type="submit" class="btn btn-sm btn-success">Send to Device</button>
+            </div>
+        </form>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted"><em>No local IPA files found. Configure Local IPA Paths above.</em></p>
+    {% endif %}
 </body>
 </html>
