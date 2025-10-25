@@ -9,6 +9,7 @@ Some paths and methods may need to be updated for other devices or iOS versions.
 ## Features
 
 - **Remote File Upload**: Transfer IPA files to your iOS device via SCP
+- **Local File Upload**: Optionally lists local IPA files with a 1-click upload button
 - **Application Management**: View and manage sideloaded applications
 - **Application Removal**: Uninstall applications directly from the web interface
 - **Real-time Status**: Monitor upload and operation progress
