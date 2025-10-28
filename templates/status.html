@@ -8,16 +8,54 @@
         #statusbox {
             max-height: 400px;
             overflow-y: auto;
-            background: #f8f9fa;
+            background: #28292c;
             padding: 1em;
-            border: 1px solid #dee2e6;
+            border: 1px solid #3c3733;
             font-family: monospace;
             white-space: pre-wrap;
+            color: #f6f2ee;
+        }
+        body.container.mt-4 {
+            background: #212225;
+            color: #f6f2ee;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        }
+        h2 {
+            color: #faeee3;
+            font-weight: 700;
+            margin-top: 0.5em;
+            margin-bottom: 0.7em;
+            letter-spacing: 0.5px;
+        }
+        a.btn-secondary {
+            background: #4c5058 !important;
+            color: #f6f2ee !important;
+            border: 1.5px solid #fffbe7 !important;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 0.55em 1.1em;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+            outline: none;
+            box-shadow: none;
+            height: 2.4em;
+            vertical-align: middle;
+        }
+        a.btn-secondary:focus, a.btn-secondary:hover {
+            outline: 2px solid #faeee3;
+            color: #fffbe7 !important;
+            background: #343b45 !important;
+            text-decoration: none !important;
         }
     </style>
 </head>
 <body class="container mt-4">
     <h2>Status</h2>
+    This can take a while depending on the size of the file.
+    <p></p>
     <pre id="statusbox">{{ status|join('\n') }}</pre>
     <a href="/" class="btn btn-secondary">Back</a>
     <script>
