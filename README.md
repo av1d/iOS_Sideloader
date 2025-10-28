@@ -15,13 +15,20 @@ Some paths and methods may need to be updated for other devices or iOS versions.
 - **Real-time Status**: Monitor upload and operation progress
 - **SpringBoard Auto-Restart**: Automatically refreshes the home screen after app removal
 
+### New and Extended Features
+
+- **Aggressive App Uninstall & Cleanup**: Removes not only the application but also all containers, caches, preferences, logs, and related files using both UUID and Bundle ID for more thorough cleanup.
+- **Automatic Detection and Cleanup of Stuck or Partial Installs**: If installation fails due to leftover artifacts or partial installs, the tool now attempts aggressive cleanup and retries the install automatically.
+- **Advanced Local IPA Management**: Optionally scans custom local paths for IPA files, displays all available local IPA files, and provides 1-click upload to the device.
+- **Threaded Operations**: All cleanup and upload/removal operations run as independent threads to avoid blocking and improve reliability.
+
 ## Prerequisites
 
 - Python 3.x
 - A jailbroken iOS device with SSH access enabled
 - Install 'IPA Installer Console' on your device from Cydia (Cydia is installed during jailbreak)
 - Network connectivity between your computer and iOS device (same network or accessible IP)
-- SSH credentials for your iOS device (default: user=root, password=alpine)
+- SSH credentials for your iOS device (default: user=root, password=alpine if you jailbroke with Legacy iOS Kit)
 
 ## Installation
 
@@ -64,13 +71,13 @@ Update these values to match your iOS device:
 project-directory/
 ├── app.py                  # Main Flask application
 ├── requirements.txt        # Python dependencies
-├── settings.json          # Configuration file
-├── license.txt            # MIT License
-├── templates/             # HTML templates
-│   ├── upload.html        # File upload interface
-│   ├── manage.html        # App management interface
-│   └── status.html        # Status display page
-└── uploads/               # Temporary storage for uploaded files
+├── settings.json           # Configuration file
+├── license.txt             # MIT License
+├── templates/              # HTML templates
+│   ├── upload.html         # File upload interface
+│   ├── manage.html         # App management interface
+│   └── status.html         # Status display page
+└── uploads/                # Temporary storage for uploaded files
 ```
 
 ## Usage
@@ -110,12 +117,21 @@ http://<your-computer-ip>:5000
 4. Click upload
 5. Monitor the upload progress on the status page
 
+#### Extended Upload Capabilities
+
+- You can now choose from IPA files found in configurable local directories for one-click upload.
+- If an IPA fails to install, the system will attempt aggressive deletion using both its UUID and bundle identifier, then retry the install automatically.
+
 ### Managing Applications
 
 1. Navigate to `/manage` to view installed sideloaded applications
 2. Applications are listed by name
 3. Click the uninstall button next to any application to remove it
 4. The SpringBoard will automatically restart to refresh the home screen of your iOS device
+
+#### Extended Management Capabilities
+
+- Uninstalling now triggers comprehensive deletion: all app bundles, containers, preferences, caches, logs, and related files are removed along with force-killing associated processes and refreshing SpringBoard.
 
 ### Viewing Status
 
@@ -131,6 +147,10 @@ You can modify settings either by:
 - Using the web interface form on the upload page
 - You can use appinstaller instead of IPA Installer, just change the command in app.py
 
+### New Configuration Option
+
+- You can set one or more custom directories to scan for local IPA files by editing `settings.json` or using the upload page form with a comma-separated list.
+
 ### Security Considerations
 
 - Change the default SSH password on your iOS device from "alpine" to something secure
@@ -141,8 +161,8 @@ You can modify settings either by:
 
 1. **Upload Process**: Files are uploaded to the local `uploads/` folder, then transferred to the iOS device via SCP
 2. **App Listing**: Scans `/User/Applications` on the iOS device for UUID folders and extracts app names
-3. **App Removal**: Deletes the UUID folder and restarts SpringBoard using SSH commands
-4. **Threading**: Upload and deletion operations run in background threads to prevent blocking
+3. **App Removal**: Deletes the UUID folder, all associated container and bundle data, removes preferences, cleans up caches, terminates running processes, and refreshes the SpringBoard using SSH commands.
+4. **Threading**: All cleanup, upload, and removal operations execute in the background using Python threads.
 
 ## Troubleshooting
 
@@ -176,7 +196,7 @@ Copyright (c) 2025 av1d
 
 ## Version
 
-Current version: 1.0.4
+Current version: 1.0.8
 
 ## Contributing
 
