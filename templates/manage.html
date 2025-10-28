@@ -1,37 +1,124 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Installed Apps</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
+        html, body {
+            background: #212225;
+            color: #f6f2ee;
+            width: 100%;
+            height: 100%;
+            font-size: 19px;
+            line-height: 1.7;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        }
+        h2, h4 {
+            color: #faeee3;
+            font-weight: 700;
+            margin-top: 0.5em;
+            margin-bottom: 0.7em;
+            letter-spacing: 0.5px;
+        }
         .app-item {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
+            background: #28292c;
+            border: 1px solid #3c3733;
             padding: 15px;
             margin-bottom: 10px;
-            border-radius: 5px;
+            border-radius: 9px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .app-name {
-            font-family: monospace;
+            font-family: 'IBM Plex Mono', 'Menlo', monospace;
+            font-weight: 600;
+            color: #fffbe7;
+            font-size: 1.13em;
+            letter-spacing: 0.025em;
+        }
+        /* Info alert: cozy blue-grey */
+        .alert-info {
+            background: #353c49;
+            color: #f5f4ec;
+            border: 1px solid #616472;
+        }
+        /* Warning alert: muted, warm, readable */
+        .alert-warning {
+            background: #684d41; /* earthy, warm brown */
+            color: #fff7f0;
+            border: 1px solid #90675b;
+        }
+        /* Delete button: strong but not circus */
+        .btn-danger.btn-sm {
+            background-color: #b04237 !important; /* muted brick */
+            color: #fff7f0 !important;
+            border: 2px solid #fff7f0;
             font-weight: bold;
+            font-size: 1em;
+            padding: 0.55em 1.1em;
+            border-radius: 5px;
+        }
+        .btn-danger.btn-sm:focus, .btn-danger.btn-sm:hover {
+            background-color: #684d41 !important;
+            color: #fff7f0 !important;
+            outline: 2px solid #fffbe7;
+        }
+        /* Secondary button: deep slate */
+        .btn-secondary {
+            background: #4c5058 !important;
+            color: #f6f2ee !important;
+            border: 1.5px solid #fffbe7;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 0.55em 1.1em;
+            border-radius: 5px;
+        }
+        /* Primary button: not primary blue, muted midnight */
+        .btn-primary {
+            background: #324057 !important;
+            color: #fffbe7 !important;
+            border: 1.5px solid #fffbe7;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 0.55em 1.1em;
+            border-radius: 5px;
+        }
+        .btn-secondary:focus, .btn-secondary:hover,
+        .btn-primary:focus, .btn-primary:hover {
+            outline: 2px solid #faeee3;
+            color: #fffbe7 !important;
+            background: #343b45 !important;
+        }
+        .alert strong, .alert ul, .alert p {
+            font-size: 1em;
+        }
+        .alert ul {
+            margin-top: 8px;
+            margin-bottom: 0;
+            padding-left: 22px;
+        }
+        .alert li {
+            margin-bottom: 4px;
+        }
+        a:focus {
+            outline: 2px solid #faeee3;
+            background: #4c5058;
+            color: #fffbe7 !important;
         }
     </style>
 </head>
 <body class="container mt-4">
     <h2>Manage Installed Apps</h2>
-    <div class="alert alert-info">
-        <strong>Connected to:</strong> {{ settings['REMOTE_IP'] }}<br>
+    <div class="alert alert-info" role="alert">
+        <strong>Device IP:</strong> {{ settings['REMOTE_IP'] }}<br>
         <strong>Note:</strong> This only shows actual installed app bundles.<br>
-        <strong>Tip:</strong> Only delete apps you're absolutely sure about. This will run uicache to refresh icons.
+        <strong>Tip:</strong> Only delete apps you're absolutely sure about. This cannot be undone! When in doubt, back up first!
     </div>
     {% if apps %}
         <h4>Installed Apps ({{ apps|length }})</h4>
-        <div class="alert alert-warning">
-            <strong>Warning:</strong> Be careful when deleting apps. This will permanently remove the app and run uicache to refresh SpringBoard.
+        <div class="alert alert-warning" role="alert">
+            <strong>Warning:</strong> Be careful when deleting apps. This will permanently remove the app and run uicache to refresh SpringBoard. This cannot be undone! When in doubt, back up your files first!
         </div>
         {% for app in apps %}
         <div class="app-item">
@@ -45,8 +132,16 @@
         </div>
         {% endfor %}
     {% else %}
-        <div class="alert alert-warning">
-            No apps found or unable to connect to device.
+        <div class="alert alert-warning" role="alert">
+	    <span style="font-size: 1.35em; font-weight: 700; letter-spacing: 0.03em; display: block; margin-bottom: 0.8em; color: #fffbe7;">
+	    No apps found or unable to connect to device.
+	    </span>
+            <b>troubleshooting:</b>
+            <ul>
+                <li>Is the screen on and unlocked?</li>
+                <li>Are you near your wifi access point?</li>
+                <li>Are you out of airplane mode?</li>
+            </ul>
         </div>
     {% endif %}
     <div class="mt-4">
