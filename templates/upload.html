@@ -125,6 +125,11 @@
             color: #fff7f0 !important;
             border: 1.5px solid #fffbe7 !important;
         }
+        .btn-save {
+            background: #443c57 !important;
+            color: #fff7f0 !important;
+            border: 1.5px solid #fffbe7 !important;
+        }
         .btn-upload:focus, .btn-upload:hover,
         .btn-clear:focus, .btn-clear:hover,
         .btn-manage:focus, .btn-manage:hover {
@@ -165,7 +170,7 @@
     <p></p>
     <form method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <input type="file" name="file" required class="form-control" />
+            <input type="file" name="file" class="form-control" />
         </div>
         <div class="mb-3">
             <label>Remote IP</label>
@@ -191,7 +196,11 @@
             <button type="submit" class="custom-btn btn-upload">Upload</button>
             <a href="/" class="custom-btn btn-clear">Clear</a>
             <a href="/manage" class="custom-btn btn-manage">Manage Files</a>
+            <button type="submit" name="action" value="save" class="custom-btn btn-save">Save Settings</button>
         </div>
+        <span style="color: #91a832;">
+			Note: if you entered a new IP address above, you must click 'Save Settings' before using the 'Manage Files' feature.
+		</span>
     </form>
 
     <hr class="my-4">
