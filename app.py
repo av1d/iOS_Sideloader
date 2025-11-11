@@ -9,7 +9,7 @@ from scp import SCPClient
 
 # iOS Sideloader
 # (c) 2025 av1d
-VERSION = "1.0.8"
+VERSION = "1.0.9"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -256,7 +256,7 @@ def nuke_app_folder(uuid, settings):
         STATUS.append('App fully removed.')
     except Exception as e:
         STATUS.append(f"Error nuking app: {str(e)}")
-
+"""
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     settings = load_settings()
@@ -277,6 +277,35 @@ def upload_file():
         thread.start()
         return redirect(url_for('status_page'))
     # Get local IPAs for display
+    local_ipas = scan_local_ipas(settings.get('LOCAL_IPA_PATHS', []))
+    return render_template('upload.html', settings=settings, local_ipas=local_ipas)
+"""
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    settings = load_settings()
+    if request.method == 'POST':
+        settings['REMOTE_IP'] = request.form['REMOTE_IP']
+        settings['REMOTE_USER'] = request.form['REMOTE_USER']
+        settings['REMOTE_PASS'] = request.form['REMOTE_PASS']
+        settings['REMOTE_PATH'] = request.form['REMOTE_PATH']
+        paths_str = request.form.get('LOCAL_IPA_PATHS', '')
+        settings['LOCAL_IPA_PATHS'] = [p.strip() for p in paths_str.split(',') if p.strip()]
+        save_settings(settings)
+
+        # Different behavior depending on which button was clicked.
+        if request.form.get('action') == 'save':
+            # Just save settings and reload page immediately without delay
+            return redirect(url_for('upload_file'))
+
+        f = request.files.get('file')
+        if f and f.filename:
+            fname = secure_filename(f.filename)
+            local_path = os.path.join(app.config['UPLOAD_FOLDER'], fname)
+            f.save(local_path)
+            thread = threading.Thread(target=scp_and_remote, args=(local_path, settings))
+            thread.start()
+            return redirect(url_for('status_page'))
+
     local_ipas = scan_local_ipas(settings.get('LOCAL_IPA_PATHS', []))
     return render_template('upload.html', settings=settings, local_ipas=local_ipas)
 
@@ -301,8 +330,15 @@ def manage_apps():
     settings = load_settings()
     apps = list_apps(settings)
     return render_template('manage.html', apps=apps, settings=settings)
-
+"""
 @app.route('/uninstall/', methods=['POST'])
+def uninstall(uuid):
+    settings = load_settings()
+    thread = threading.Thread(target=nuke_app_folder, args=(uuid, settings))
+    thread.start()
+    return redirect(url_for('status_page'))
+"""
+@app.route('/uninstall/<uuid>', methods=['POST'])
 def uninstall(uuid):
     settings = load_settings()
     thread = threading.Thread(target=nuke_app_folder, args=(uuid, settings))
