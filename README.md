@@ -20,10 +20,10 @@ As this relies upon **ipainstaller** being installed on the target device, you c
 *Main web interface for uploading and managing IPA files*
 
 ![Local Files Picker](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/local_files.png)
-*Advanced local IPA file management and picker*
+*Local IPA file picker for fast uploads*
 
 ![Manage Installed Apps](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/manage.png)
-*Sideloaded apps list and management interface*
+*Installed apps list and quick uninstall*
 
 ![Status and Progress](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/status.png)
 *Real-time upload and operation status page*
@@ -210,7 +210,7 @@ Copyright (c) 2025 av1d
 
 ## Version
 
-Current version: 1.0.8
+Current version: 1.0.9
 
 ## Contributing
 
