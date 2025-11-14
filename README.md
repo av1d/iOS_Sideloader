@@ -2,9 +2,8 @@
 
 A Flask-based web application for managing sideloaded iOS applications remotely. Upload and install IPA files to your jailbroken iOS device and manage installed applications through a web interface. Allows you to add and remove applications quickly, without need of iTunes or other convoluted methods.
 
-Tested on an iPod 4G running iOS 6.1.6 which was jailbroken with [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit/) on Ubuntu 22.04.
+As this relies upon **ipainstaller** being installed on the target device, you currently need a minimum iOS version of 5 to use it.
 
-Some paths and methods may need to be updated for other devices or iOS versions. I have no knowledge how to do this.
 
 ## Features
 
