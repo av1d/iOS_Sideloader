@@ -14,6 +14,21 @@ As this relies upon **ipainstaller** being installed on the target device, you c
 - **Real-time Status**: Monitor upload and operation progress
 - **SpringBoard Auto-Restart**: Automatically refreshes the home screen after app removal
 
+## Screenshots
+
+![Main Web UI](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/main.png)
+*Main web interface for uploading and managing IPA files*
+
+![Local Files Picker](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/local_files.png)
+*Advanced local IPA file management and picker*
+
+![Manage Installed Apps](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/manage.png)
+*Sideloaded apps list and management interface*
+
+![Status and Progress](https://github.com/av1d/iOS_Sideloader/blob/main/screenshots/status.png)
+*Real-time upload and operation status page*
+
+
 ### New and Extended Features
 
 - **Aggressive App Uninstall & Cleanup**: Removes not only the application but also all containers, caches, preferences, logs, and related files using both UUID and Bundle ID for more thorough cleanup.
