@@ -39,10 +39,11 @@ As this relies upon **ipainstaller** being installed on the target device, you c
 ## Prerequisites
 
 - Python 3.x
-- A jailbroken iOS device with SSH access enabled
+- A jailbroken iOS (>=5) device with SSH access enabled
 - Install 'IPA Installer Console' on your device from Cydia (Cydia is installed during jailbreak)
-- Network connectivity between your computer and iOS device (same network or accessible IP)
-- SSH credentials for your iOS device (default: user=root, password=alpine if you jailbroke with Legacy iOS Kit)
+- Wireless network connectivity between your computer and iOS device (same network or accessible IP)
+- SSH credentials for your iOS device (default: user=root, password=alpine if you jailbroke with [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit/)
+)
 
 ## Installation
 
