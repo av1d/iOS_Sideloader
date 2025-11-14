@@ -70,7 +70,7 @@ The required dependencies are:
   "REMOTE_IP": "192.168.0.27",
   "REMOTE_USER": "root",
   "REMOTE_PASS": "alpine",
-  "REMOTE_PATH": "/var/mobile/Downloads"
+  "REMOTE_PATH": "/tmp"
 }
 ```
 
