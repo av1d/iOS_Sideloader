@@ -1,9 +1,9 @@
 {
-  "REMOTE_IP": "192.168.0.27",
+  "REMOTE_IP": "192.168.0.2",
   "REMOTE_USER": "root",
   "REMOTE_PASS": "alpine",
-  "REMOTE_PATH": "/var/mobile/Downloads",
+  "REMOTE_PATH": "/tmp",
   "LOCAL_IPA_PATHS": [
-    "/home/av1d/iOS_Sideloader_(test)/IPA"
+    "/home/user/IPA"
   ]
 }
